@@ -1,31 +1,24 @@
-<?php
-session_start();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WRC Fantasy - Login</title>
+    <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to WRC Fantasy</h2>
+        <form action="login_process.php" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
 
-// Assuming you have a function to validate user credentials
-function validateUser($username, $password) {
-    // Add your logic here to validate the user credentials
-    // For example, check against a database
-    if ($username === 'example' && $password === 'password') {
-        return true;
-    } else {
-        return false;
-    }
-}
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if (validateUser($username, $password)) {
-        // User authenticated, start session and store user data
-        $_SESSION['username'] = $username;
-        // Redirect to the dashboard or any other page
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        // Authentication failed, redirect back to login page with error
-        header("Location: login.php?error=invalid_credentials");
-        exit();
-    }
-}
-?>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
