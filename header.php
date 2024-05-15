@@ -1,12 +1,8 @@
 <?php
-session_start();
-
 // Function to check if user is logged in
 function isLoggedIn() {
     return isset($_SESSION['username']);
 }
-
-// Include this file in your dashboard and team selection pages
 ?>
 
 <header>
@@ -15,13 +11,14 @@ function isLoggedIn() {
         <ul>
             <li><a href="dashboard.php" class="link">Dashboard</a></li>
             <li><a href="team_selection.php" class="link">Team Selection</a></li>
+            <li><a href="leagues.php" class="link">My Leagues</a></li>
             <!-- Add more links as needed -->
         </ul>
         <div id="login-status">
             <?php if (isLoggedIn()): ?>
-                <a href="logout.php">Logout</a>
+                <a href="logout.php" class="link2">Logout</a>
             <?php else: ?>
-                <a href="login.php">Login</a>
+                <a href="login.php" class="link2">Login</a>
             <?php endif; ?>
         </div>
     </nav>

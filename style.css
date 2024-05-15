@@ -3,6 +3,17 @@ html {
     font-family: 'Afacad';
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 header {
     background-color: #333;
     color: #fff;
@@ -23,6 +34,7 @@ nav ul li {
 
 main {
     padding: 2rem;
+    flex: 1;
 }
 
 footer {
@@ -37,14 +49,21 @@ footer {
     text-decoration: none;
 }
 
+.link2 {
+    font-size: 120%;
+    color: #000;
+    text-decoration: none;
+}
+
 #login-status {
     position: absolute; /* Add this line */
     top: 1rem; /* Adjust this value to set the distance from the top */
     right: 1rem; /* Adjust this value to set the distance from the right */
+    background-color: #fff;
 }
 
 .login-container {
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
