@@ -166,6 +166,29 @@ CREATE TABLE IF NOT EXISTS `wrcFantasy`.`Nabor_has_Ekipe` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `wrcFantasy`.`Leaderboard`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `wrcFantasy`.`Leaderboard`;
+
+CREATE TABLE IF NOT EXISTS `wrcFantasy`.`Leaderboard` (
+  `idLeaderboard` INT NOT NULL AUTO_INCREMENT,
+  `id_uporabnika` INT NOT NULL,
+  `tocke` INT NOT NULL,
+  `id_lige` INT NOT NULL,
+  PRIMARY KEY (`idLeaderboard`),
+  CONSTRAINT `fk_Leaderboard_Uporabnik`
+    FOREIGN KEY (`id_uporabnika`)
+    REFERENCES `wrcFantasy`.`Uporabnik` (`idUporabnik`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Leaderboard_Liga`
+    FOREIGN KEY (`id_lige`)
+    REFERENCES `wrcFantasy`.`Liga` (`idLiga`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
