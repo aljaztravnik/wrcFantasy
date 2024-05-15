@@ -1,0 +1,44 @@
+/* Add your CSS styles here */
+html {
+    font-family: 'Afacad';
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 1rem;
+}
+
+main {
+    padding: 2rem;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+.link {
+    color: #fff;
+    text-decoration: none;
+}
+
+#login-status {
+    position: absolute; /* Add this line */
+    top: 1rem; /* Adjust this value to set the distance from the top */
+    right: 1rem; /* Adjust this value to set the distance from the right */
+}
