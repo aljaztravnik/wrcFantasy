@@ -1,16 +1,9 @@
 <?php
-session_start();
-
-// Function to check if user is logged in
-function isLoggedIn() {
-    return isset($_SESSION['username']);
-}
-
 // Redirect to login page if user is not logged in
-if (!isLoggedIn()) {
-    header("Location: login.php");
-    exit();
-}
+//if (!isLoggedIn()) {
+//    header("Location: login.php");
+//    exit();
+//}
 ?>
 
 <!DOCTYPE html>
@@ -29,11 +22,11 @@ if (!isLoggedIn()) {
     <main>
         <h2>Upcoming Events</h2>
         <div id="events-list">
-            <!-- Events will be dynamically loaded here via JavaScript -->
+            <!-- Events will be dynamically loaded here via PHP -->
         </div>
         <h2>League Standings</h2>
         <div id="league-standings">
-            <!-- League standings will be dynamically loaded here via JavaScript -->
+            <!-- League standings will be dynamically loaded here via PHP -->
         </div>
     </main>
     <footer>
