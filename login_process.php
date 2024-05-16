@@ -1,25 +1,45 @@
 <?php
 session_start();
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if the username and password are provided
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        // Validate the username and password (you should replace this with your validation logic)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "wrcFantasy";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if($conn->connect_error){
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        // Example validation (replace this with your own)
-        if ($username === 'test' && $password === 'test') {
-            // Authentication successful, set session variable
-            $_SESSION['username'] = $username;
-
-            // Redirect to the dashboard or any other page
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            // Authentication failed, redirect back to login page with error
-            header("Location: login.php?error=invalid_credentials");
+        $login_sql = "SELECT geslo FROM Uporabnik WHERE uporabnisko_ime=?";
+        $stmt = $conn->prepare($login_sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $login_result = $stmt->get_result();
+        
+        if($login_result->num_rows > 0){
+            $row = $login_result->fetch_assoc();
+            $hashed_password_from_db = $row["geslo"];
+            // Primerjava zakriptiranega gesla iz baze z vnešenim geslom
+            if(password_verify($password, $hashed_password_from_db)){
+                echo "Geslo je pravilno.";
+                $_SESSION['username'] = $username;
+                header("Location: dashboard.php");
+                exit();
+            }else{
+                echo "Napačno geslo.";
+                header("Location: login.php?error=invalid_password");
+                exit();
+            }
+        }else{
+            echo "Uporabniško ime ni najdeno.";
+            header("Location: login.php?error=invalid_username");
             exit();
         }
     }
