@@ -47,8 +47,8 @@ $result_get_leaderboard = $conn->query($sql_get_leaderboard);
     <link rel="stylesheet" href="style.css">
     <style>
         table {
-            width: 80%; /* Adjust table width as needed */
-            margin: 0 auto; /* Center the table horizontally */
+            width: 80%;
+            margin: 0 auto;
             border-collapse: collapse;
         }
 
@@ -67,7 +67,44 @@ $result_get_leaderboard = $conn->query($sql_get_leaderboard);
 
         .owner {
             font-weight: bold;
-            color: rgb(255, 156, 18); /* Change color as needed */
+            color: rgb(255, 156, 18);
+        }
+
+        .selected-items-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .item {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
+            cursor: pointer;
+            max-width: 250px;
+            max-height: 300px;
+        }
+
+        .item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .driver-info, .team-info {
+            margin-top: 10px;
+        }
+
+        .driver-name, .team-name {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .driver-price, .team-price {
+            color: #888;
         }
     </style>
 </head>
@@ -100,10 +137,57 @@ $result_get_leaderboard = $conn->query($sql_get_leaderboard);
                     <?php } ?>
                 </tbody>
             </table>
+            <?php
+            $id_lige = (int) $id_lige;
+            $un = $_SESSION['username'];
+            $sql_nabor_isset = "SELECT * FROM Nabor n
+                                INNER JOIN Uporabnik u on n.Uporabnik_idUporabnik = u.idUporabnik
+                                WHERE n.Liga_idLiga='$id_lige' AND u.uporabnisko_ime='$un'";
+            $result = $conn->query($sql_nabor_isset);
+            if($result->num_rows > 0){
+                echo "<h3 style='text-align: center;'>SELECTED TEAM:</h3>";
+                $sql_get_id_up = "SELECT idUporabnik FROM Uporabnik WHERE uporabnisko_ime='$un'";
+                $res = $conn->query($sql_get_id_up);
+                $row = $res->fetch_assoc();
+                $userID = $row['idUporabnik'];
+                $drivers_sql = "SELECT v.idVoznika, `ime in priimek` AS name, v.cena AS price, v.img_src AS image FROM Vozniki v
+                                INNER JOIN Nabor_has_Vozniki nv ON v.idVoznika=nv.Vozniki_idVoznika
+                                INNER JOIN Nabor n ON n.idNabor=nv.Nabor_idNabor
+                                WHERE n.Uporabnik_idUporabnik='$userID' AND n.Liga_idLiga='$id_lige';";
+                $teams_sql = "SELECT e.idEkipe AS id, e.ime AS name, e.cena AS price, e.img_src AS image FROM Ekipe e
+                                INNER JOIN Nabor_has_Ekipe ne ON ne.Ekipe_idEkipe=e.idEkipe
+                                INNER JOIN Nabor n ON n.idNabor=ne.Nabor_idNabor
+                                WHERE n.Uporabnik_idUporabnik='$userID' AND n.Liga_idLiga='$id_lige';";
+
+                $drivers_result = $conn->query($drivers_sql);
+                $teams_result = $conn->query($teams_sql);
+
+                echo "<div class='selected-items-container'>";
+                while ($row = $drivers_result->fetch_assoc()) {
+                    echo "<div class='driver-item item' data-id='" . $row['idVoznika'] . "' data-price='" . $row['price'] . "'>";
+                    echo "<img src='" . $row['image'] . "' alt='" . $row['name'] . "' class='driver-image'>";
+                    echo "<div class='driver-info'>";
+                    echo "<p class='driver-name'>" . $row['name'] . "</p>";
+                    echo "<p class='driver-price'>" . $row['price'] . "M €</p>";
+                    echo "</div></div>";
+                }
+
+                while ($row = $teams_result->fetch_assoc()) {
+                    echo "<div class='team-item item' data-id='" . $row['id'] . "' data-price='" . $row['price'] . "'>";
+                    echo "<img src='" . $row['image'] . "' alt='" . $row['name'] . "' class='team-image'>";
+                    echo "<div class='team-info'>";
+                    echo "<p class='team-name'>" . $row['name'] . "</p>";
+                    echo "<p class='team-price'>" . $row['price'] . "M €</p>";
+                    echo "</div></div>";
+                }
+                echo "</div>";
+            } else {
+                $url = "team_selection.php?id=" . $id_lige;
+                echo "<a class='link2' href='" . $url . "'><h3 style='text-align: center;'>CHOOSE YOUR DRIVERS</h3></a>";
+            }
+        ?>
         </main>
-        <?php $url = "team_selection.php?id=" . $id_lige?>
-        <a class="link2" href="<?php echo $url; ?>"><h3 style="text-align: center;">CHOOSE YOUR DRIVERS</h3></a>
+        <?php include 'footer.php'; ?>
     </div>
-    <?php include 'footer.php'; ?>
 </body>
 </html>
