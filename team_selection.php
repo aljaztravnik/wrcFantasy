@@ -6,6 +6,13 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+if(!isset($_GET['id'])){
+    header("Location: dashboard.php");
+    exit();
+}
+
+$id_lige = $_GET['id'];
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -120,7 +127,6 @@ $teams_result = $conn->query($teams_sql);
             item.addEventListener("click", function() {
                 const id = item.getAttribute("data-id");
                 const price = parseInt(item.getAttribute("data-price"));
-
                 if (selectedTeam === id) {
                     item.classList.remove("selected");
                     selectedTeam = null;
@@ -140,25 +146,21 @@ $teams_result = $conn->query($teams_sql);
 
         document.getElementById("submit-team").addEventListener("click", function() {
             if (selectedDrivers.length === 2 && selectedTeam && budget >= 0) {
-                alert("Team submitted successfully!");
-                // Submit data to the server
-                fetch('submit_team.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        drivers: selectedDrivers,
-                        team: selectedTeam
-                    })
+                alert("Selection submitted successfully!");
+                // Construct the query string
+                const queryString = `driver1=${selectedDrivers[0]}&driver2=${selectedDrivers[1]}&team=${selectedTeam}`;
+                console.log(queryString);
+                // Submit data to the server via GET request
+                fetch(`submit_team.php?id=<?php echo $id_lige; ?>&${queryString}`, {
+                    method: 'GET',
                 }).then(response => response.json())
-                  .then(data => {
-                      if (data.success) {
-                          alert("Team saved successfully!");
-                      } else {
-                          alert("Error saving team.");
-                      }
-                  });
+                .then(data => {
+                    if (data.success) {
+                        alert("Team saved successfully!");
+                    } else {
+                        alert("Error saving team.");
+                    }
+                });
             } else {
                 alert("Please select 2 drivers and 1 team and ensure your budget is within the limit.");
             }
