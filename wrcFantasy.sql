@@ -218,3 +218,26 @@ VALUES
     (11, 'Ott Tänak', 16, 1, "https://wrc.enhance.diagnal.com/resources/images/eyJrZXkiOiJodHRwczovL2VuaGFuY2Utc3RvcmFnZS1zdGFjay1wcm9kLXdyY21lZGlhZmlsZXN0b3JhZ2UtZzN6MmhnM3Vyd2ZmLnMzLmFtYXpvbmF3cy5jb20vNDg0MDcwNDAtNTUyYy00Njg1LTk1NmEtMDdhN2E1MDQxNjUyX290dC10YW5hay5qcGciLCJ0aW1lc3RhbXAiOiIyMDI0LTA0LTE5VDA5OjQ2OjEyLjM0MFoiLCJlZGl0cyI6eyJleHRyYWN0Ijp7ImxlZnQiOjAsInRvcCI6MCwid2lkdGgiOjE5MjAsImhlaWdodCI6MTA4MH0sInJlc2l6ZSI6eyJ3aWR0aCI6NDgwLCJoZWlnaHQiOjI3MH0sImpwZWciOnsicXVhbGl0eSI6MTAwfX19/48407040-552c-4685-956a-07a7a5041652_ott-tanak.jpg"),         -- Hyundai
     (12, 'Andreas Mikkelsen', 10, 1, "https://wrc.enhance.diagnal.com/resources/images/eyJrZXkiOiJodHRwczovL2VuaGFuY2Utc3RvcmFnZS1zdGFjay1wcm9kLXdyY21lZGlhZmlsZXN0b3JhZ2UtZzN6MmhnM3Vyd2ZmLnMzLmFtYXpvbmF3cy5jb20vNzcwM2E2YjAtZWE4Yi00NWI0LTg0YTUtN2ExODQ5MjVlNTU5X2FuZHJlYXMtbWlra2Vsc2VuLmpwZyIsInRpbWVzdGFtcCI6IjIwMjQtMDQtMTlUMDk6NDY6MTEuMzA0WiIsImVkaXRzIjp7ImV4dHJhY3QiOnsibGVmdCI6MCwidG9wIjowLCJ3aWR0aCI6MTkyMCwiaGVpZ2h0IjoxMDgwfSwicmVzaXplIjp7IndpZHRoIjo0ODAsImhlaWdodCI6MjcwfSwianBlZyI6eyJxdWFsaXR5IjoxMDB9fX0=/7703a6b0-ea8b-45b4-84a5-7a184925e559_andreas-mikkelsen.jpg"), -- Hyundai
     (13, 'Jourdan Serderidis', 8, 2, "https://wrc.enhance.diagnal.com/resources/images/eyJrZXkiOiJodHRwczovL2VuaGFuY2Utc3RvcmFnZS1zdGFjay1wcm9kLXdyY21lZGlhZmlsZXN0b3JhZ2UtZzN6MmhnM3Vyd2ZmLnMzLmFtYXpvbmF3cy5jb20vZDZkZmUxMTUtODYwNy00ZjhjLTlkNDktODk2ODViOTkzNjQxX2pvdXJkYW4tc2VyZGVyaWRpcy5qcGciLCJ0aW1lc3RhbXAiOiIyMDI0LTA0LTE5VDA5OjQ2OjEyLjU5MloiLCJlZGl0cyI6eyJleHRyYWN0Ijp7ImxlZnQiOjAsInRvcCI6MCwid2lkdGgiOjE5MjAsImhlaWdodCI6MTA4MH0sInJlc2l6ZSI6eyJ3aWR0aCI6NDgwLCJoZWlnaHQiOjI3MH0sImpwZWciOnsicXVhbGl0eSI6MTAwfX19/d6dfe115-8607-4f8c-9d49-89685b993641_jourdan-serderidis.jpg");-- M-Sport
+
+
+INSERT INTO uporabnik(idUporabnik, uporabnisko_ime, geslo, role) VALUES
+(1, "admin", "$2y$10$iKYBMqOcdXCryKNm0Qjwbu2jQLJ7SNilIRyLFfuch80umSTI4r8O2", 1),
+(2, "janez", "$2y$10$Q3k3HXpun10hJ5Xbmbyx9uidjVOfo7yTnSh51Akbnk43xx6k62LM2", 2),
+(3, "miha", "$2y$10$OFoCEBsx9z1rv2XbwzpZ.epQL635FJ4tmeacEwckZaTWDHmvH1Ojq", 2),
+(4, "tone", "$2y$10$4M79n.ieHJnKjOBWU5sFee5bj/7KAvpEowMbmhI79etVvSNQ83D0y", 2);
+
+INSERT INTO liga(idLiga, ime, id_lastnika) VALUES
+(1, "Slovenska liga", 1),
+(2, "Ponosna Notranjska liga", 2),
+(3, "liga navijačev Challeta Salleta", 3);
+
+INSERT INTO Uporabnik_has_Liga(Uporabnik_idUporabnik, Liga_idLiga) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 2),
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 3);
