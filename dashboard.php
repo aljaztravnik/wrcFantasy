@@ -22,14 +22,15 @@ if (!isset($_SESSION['username'])) {
             include 'header.php';
         ?>
         <main>
-            <h2>Upcoming Events</h2>
-            <div id="events-list">
-                <!-- Events will be dynamically loaded here via PHP -->
+            <?php include 'currentEvent.php'; ?>
+            <!-- Profile Summary Section
+            <div id="profile-summary">
+                <h3>Profile Summary</h3>
+                <p>Total Score: 300</p>
+                <p>Leagues Joined: 3</p>
+                <p>Current Rank: 5</p>
             </div>
-            <h2>League Standings</h2>
-            <div id="league-standings">
-                <!-- League standings will be dynamically loaded here via PHP -->
-            </div>
+            -->
         </main>
     </div>
     <?php include 'footer.php'; ?>

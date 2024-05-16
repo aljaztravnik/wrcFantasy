@@ -12,6 +12,7 @@ function isLoggedIn() {
             <li><a href="dashboard.php" class="link">Dashboard</a></li>
             <li><a href="team_selection.php" class="link">Team Selection</a></li>
             <li><a href="leagues.php" class="link">My Leagues</a></li>
+            <li><a href="calendar.php" class="link">Calendar</a></li>
             <!-- Add more links as needed -->
         </ul>
         <div id="login-status">
@@ -19,6 +20,7 @@ function isLoggedIn() {
                 <a href="logout.php" class="link2">Logout</a>
             <?php else: ?>
                 <a href="login.php" class="link2">Login</a>
+                <a href="register.php" class="link2">Register</a>
             <?php endif; ?>
         </div>
     </nav>

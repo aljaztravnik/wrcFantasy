@@ -11,8 +11,8 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WRC Fantasy - Login</title>
-    <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <title>WRC Fantasy - Register</title>
+    <link href="https://fonts.googleapis.com/css?family=Afacad" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,15 +20,15 @@ if (isset($_SESSION['username'])) {
         <?php include 'header.php'; ?>
         <main>
             <div class="login-container">
-                <h2>Login</h2>
-                <form action="login_process.php" method="post">
-                    <label for="username">Username:</label>
+                <h2>Register</h2>
+                <form action="register_process.php" method="POST">
+                    <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
 
-                    <label for="password">Password:</label>
+                    <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
 
-                    <button type="submit">Login</button>
+                    <button type="submit">Register</button>
                 </form>
             </div>
         </main>

@@ -28,17 +28,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $hashed_password_from_db = $row["geslo"];
             // Primerjava zakriptiranega gesla iz baze z vnešenim geslom
             if(password_verify($password, $hashed_password_from_db)){
-                echo "Geslo je pravilno.";
+                echo "Correct password.";
                 $_SESSION['username'] = $username;
                 header("Location: dashboard.php");
                 exit();
             }else{
-                echo "Napačno geslo.";
-                header("Location: login.php?error=invalid_password");
+                echo "Wrong password.";
+                header("Location: login.php?error=wrong_password");
                 exit();
             }
         }else{
-            echo "Uporabniško ime ni najdeno.";
+            echo "Username was not found.";
             header("Location: login.php?error=invalid_username");
             exit();
         }
