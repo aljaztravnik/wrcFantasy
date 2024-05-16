@@ -241,3 +241,14 @@ INSERT INTO Uporabnik_has_Liga(Uporabnik_idUporabnik, Liga_idLiga) VALUES
 (3, 1),
 (3, 2),
 (3, 3);
+
+INSERT INTO leaderboard(idLeaderboard, id_uporabnika, tocke, id_lige) VALUES 
+(1, 1, 100, 1),
+(2, 2, 89, 1),
+(3, 3, 32, 1),
+(4, 1, 72, 2),
+(5, 2, 10, 2),
+(6, 3, 112, 2),
+(7, 1, 100, 3),
+(8, 2, 89, 3),
+(9, 3, 32, 3);
