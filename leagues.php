@@ -6,27 +6,31 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-//// Include your database connection file
-//include 'db_connection.php';
-//
-//// Get the username of the logged-in user
-//$username = $_SESSION['username'];
-//
-//// Query to get all the leagues the user is joined in
-//$sql = "SELECT leagues.name AS league_name, leagues.league_id, leaderboard.position
-//        FROM leagues
-//        INNER JOIN leaderboard ON leagues.league_id = leaderboard.league_id
-//        WHERE leaderboard.username = '$username'";
-//$result = mysqli_query($conn, $sql);
-//
-//// Fetch leagues data
-//$leagues = [];
-//while ($row = mysqli_fetch_assoc($result)) {
-//    $leagues[] = $row;
-//}
-//
-//// Close the connection
-//mysqli_close($conn);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "wrcFantasy";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$username = $_SESSION['username'];
+
+// Fetching leagues and leaderboard positions for the logged-in user
+$sql = "SELECT l.ime AS league_name, lb.tocke AS points, lb.idLeaderboard, l.idLiga AS idLige
+        FROM Leaderboard lb
+        INNER JOIN Liga l ON lb.id_lige = l.idLiga
+        INNER JOIN Uporabnik u ON lb.id_uporabnika = u.idUporabnik
+        WHERE u.uporabnisko_ime = '$username'";
+$result = $conn->query($sql);
+
+$leagues = [];
+while ($row = $result->fetch_assoc()) {
+    $leagues[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,19 +51,19 @@ if (!isset($_SESSION['username'])) {
                 <thead>
                     <tr>
                         <th>League Name</th>
-                        <th>Position in Leaderboard</th>
+                        <th>Points in league leaderboard</th>
                     </tr>
                 </thead>
-                <!--
                 <tbody>
-                    <?php foreach ($leagues as $league): ?>
+                    <?php 
+                    foreach ($leagues as $league) { 
+                        $url = "leagueShow.php?id=" . $league['idLige']?>
                         <tr>
-                            <td><?php echo $league['league_name']; ?></td>
-                            <td><?php echo $league['position']; ?></td>
+                            <td><a class="link2" href="<?php echo $url; ?>"><?php echo $league['league_name']; ?></a></td>
+                            <td><?php echo $league['points']; ?></td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </tbody>
-                -->
             </table>
         </main>
     </div>
