@@ -98,3 +98,50 @@ footer {
 .login-container button:hover {
     background-color: #0056b3;
 }
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.item {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px; /* Decrease padding to make items smaller */
+    margin: 5px; /* Adjust margin to create space between items */
+    text-align: center;
+    cursor: pointer;
+    flex: 1 1 calc(15% - 10px); /* 5 items per row with a little margin between items */
+    max-width: calc(15% - 10px); /* Minimum width for items */
+    box-sizing: border-box;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.item.selected {
+    border-color: rgb(255, 156, 18);
+}
+
+.driver-info, .team-info {
+    margin-top: 10px;
+}
+
+.driver-name, .team-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.driver-price, .team-price {
+    color: #888;
+}
+
+#budget {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 1em;
+}
