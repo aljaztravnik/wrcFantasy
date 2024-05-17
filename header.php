@@ -10,7 +10,7 @@ function isLoggedIn() {
     <nav>
         <ul>
             <li><a href="dashboard.php" class="link">Dashboard</a></li>
-            <li><a href="team_selection.php" class="link">Team Selection</a></li>
+            <li><a href="allLeagues.php" class="link">Leagues</a></li>
             <li><a href="leagues.php" class="link">My Leagues</a></li>
             <li><a href="calendar.php" class="link">Calendar</a></li>
             <!-- Add more links as needed -->
