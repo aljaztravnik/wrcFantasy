@@ -140,11 +140,14 @@ $result_get_leaderboard = $conn->query($sql_get_leaderboard);
             <?php
             $id_lige = (int) $id_lige;
             $un = $_SESSION['username'];
-            $sql_nabor_isset = "SELECT * FROM Nabor n
+            $sql_nabor_isset = "SELECT n.idNabor FROM Nabor n
                                 INNER JOIN Uporabnik u on n.Uporabnik_idUporabnik = u.idUporabnik
                                 WHERE n.Liga_idLiga='$id_lige' AND u.uporabnisko_ime='$un'";
             $result = $conn->query($sql_nabor_isset);
             if($result->num_rows > 0){
+                $row = $result->fetch_assoc();
+                $id_nabora = $row['idNabor']; 
+                $id_nabora = (int) $id_nabora;
                 echo "<h3 style='text-align: center;'>SELECTED TEAM:</h3>";
                 $sql_get_id_up = "SELECT idUporabnik FROM Uporabnik WHERE uporabnisko_ime='$un'";
                 $res = $conn->query($sql_get_id_up);
@@ -181,11 +184,18 @@ $result_get_leaderboard = $conn->query($sql_get_leaderboard);
                     echo "</div></div>";
                 }
                 echo "</div>";
+                $url = "team_selection.php?id=" . $id_lige . "&del=" . $id_nabora;
+                echo "<a class='link2' href='" . $url . "' onclikc='return confirmDeletion();'><h3 style='text-align: center;'>CHANGE TEAM</h3></a>";
             } else {
                 $url = "team_selection.php?id=" . $id_lige;
                 echo "<a class='link2' href='" . $url . "'><h3 style='text-align: center;'>CHOOSE YOUR DRIVERS</h3></a>";
             }
         ?>
+        <script>
+            function confirmDeletion(){
+                return confirm("Are you sure you want to change the selection?");
+            }
+        </script>
         </main>
         <?php include 'footer.php'; ?>
     </div>
