@@ -26,6 +26,27 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+if(isset($_GET['del'])){
+    $idNabora = $_GET['del'];
+    $delete_sql = "
+        DELETE FROM Nabor_has_Vozniki WHERE Nabor_idNabor=$idNabora;
+        DELETE FROM Nabor_has_Ekipe WHERE Nabor_idNabor=$idNabora;
+        DELETE FROM Nabor WHERE idNabor=$idNabora;
+    ";
+
+    if ($conn->multi_query($delete_sql)) {
+        do {
+            // Store first result set
+            if ($result = $conn->store_result()) {
+                $result->free();
+            }
+            // If there are more results, continue to next result set
+        } while ($conn->more_results() && $conn->next_result());
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+
 $drivers_sql = "SELECT idVoznika, `ime in priimek` AS name, cena AS price, img_src AS image FROM Vozniki";
 $teams_sql = "SELECT idEkipe AS id, ime AS name, cena AS price, img_src AS image FROM Ekipe";
 
