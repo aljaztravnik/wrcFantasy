@@ -61,14 +61,64 @@ $result = $conn->query($query);
             display: flex;
             justify-content: flex-end;
         }
+        .form-container {
+            display: none;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
     </style>
+    <script>
+        function toggleForm() {
+            var formContainer = document.getElementById('form-container');
+            if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+                formContainer.style.display = 'block';
+            } else {
+                formContainer.style.display = 'none';
+            }
+        }
+    </script>
 </head>
 <body>
 <?php include 'header.php'; ?>
     <div class="wrapper">
-        
         <div class="top-right">
-            <a href="create_league.php" class="link2">Create League</a>
+            <a href="javascript:void(0);" class="link2" onclick="toggleForm()">Create League</a>
+        </div>
+        <div id="form-container" class="form-container">
+            <form action="createLeague_process.php" method="POST">
+                <label for="league_name">League Name:</label>
+                <input type="text" id="league_name" name="league_name" required>
+                <button type="submit">Create League</button>
+            </form>
         </div>
         <div class="content">
             <h1>Available Leagues</h1>

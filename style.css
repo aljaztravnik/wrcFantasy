@@ -57,6 +57,10 @@ footer {
     text-align: center;
 }
 
+.link2:hover {
+    cursor: pointer;
+}
+
 #login-status {
     position: absolute; /* Add this line */
     top: 1rem; /* Adjust this value to set the distance from the top */
